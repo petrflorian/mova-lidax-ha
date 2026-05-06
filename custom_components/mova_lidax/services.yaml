@@ -1,0 +1,66 @@
+switch_map:
+  fields:
+    map_id:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 10
+          mode: box
+
+schedule_config:
+  fields:
+    data:
+      required: true
+      selector:
+        object:
+
+update_schedule:
+  fields:
+    schedule_id:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 32
+          mode: box
+    map_id:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 10
+          mode: box
+    enabled:
+      required: false
+      selector:
+        boolean:
+    mode:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 10
+          mode: box
+    time_minutes:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1439
+          mode: box
+    weekdays:
+      required: false
+      selector:
+        object:
+    zones:
+      required: false
+      selector:
+        object:
+
+raw_action:
+  fields:
+    payload:
+      required: true
+      selector:
+        object:

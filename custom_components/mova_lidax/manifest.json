@@ -1,0 +1,15 @@
+{
+  "domain": "mova_lidax",
+  "name": "MOVA LiDAX",
+  "codeowners": [
+    "@codex"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "dreame_mower"
+  ],
+  "documentation": "https://github.com/local/mova-lidax",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "0.1.0"
+}

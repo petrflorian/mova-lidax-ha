@@ -1,0 +1,13 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.swp
+.idea/
+.vscode/
+dist/
+*.zip
+home-assistant*.log*
+home-assistant*.db*
+secrets.yaml
+.storage/
+.HA_VERSION

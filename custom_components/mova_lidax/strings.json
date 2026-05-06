@@ -1,0 +1,110 @@
+{
+  "title": "MOVA LiDAX",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect MOVA account",
+        "data": {
+          "username": "Username",
+          "password": "Password",
+          "country": "Country",
+          "account_type": "Account type"
+        }
+      },
+      "device": {
+        "title": "Select mower",
+        "data": {
+          "did": "Device"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect",
+      "no_devices": "No MOVA mower devices found"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Battery"
+      },
+      "state": {
+        "name": "State"
+      },
+      "active_map_ha": {
+        "name": "Active Map (HA)"
+      },
+      "map_hint": {
+        "name": "Map Hint"
+      },
+      "cloud_online": {
+        "name": "Cloud Online"
+      },
+      "cloud_status": {
+        "name": "Cloud Status"
+      },
+      "cloud_last_update": {
+        "name": "Cloud Last Update"
+      },
+      "cloud_video_status": {
+        "name": "Cloud Video Status"
+      },
+      "firmware_version": {
+        "name": "Firmware Version"
+      },
+      "saved_maps": {
+        "name": "Saved Maps"
+      },
+      "map_names": {
+        "name": "Map Names"
+      },
+      "total_schedules": {
+        "name": "Total Schedules"
+      },
+      "current_position_x": {
+        "name": "Current Position X"
+      },
+      "current_position_y": {
+        "name": "Current Position Y"
+      },
+      "position_source": {
+        "name": "Position Source"
+      },
+      "current_map_area": {
+        "name": "Current Map Area"
+      },
+      "current_map_zones": {
+        "name": "Current Map Zones"
+      },
+      "current_map_schedules": {
+        "name": "Current Map Schedules"
+      },
+      "ai_obstacle_detection": {
+        "name": "AI Obstacle Detection"
+      },
+      "current_path_avoid_obstacles": {
+        "name": "Current Path Avoid Obstacles"
+      },
+      "ota_info": {
+        "name": "OTA Info"
+      },
+      "last_cleaning_time": {
+        "name": "Last Mowing Time"
+      },
+      "last_cleaning_area": {
+        "name": "Last Mowing Area"
+      },
+      "last_cleaning_duration": {
+        "name": "Last Mowing Duration"
+      },
+      "cleaning_history": {
+        "name": "Mowing History"
+      }
+    },
+    "select": {
+      "selected_map": {
+        "name": "Selected Map"
+      }
+    }
+  }
+}

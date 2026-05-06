@@ -1,0 +1,264 @@
+title: MOVA LiDAX
+views:
+  - title: Přehled
+    path: app
+    icon: mdi:robot-mower
+    cards:
+      - type: glance
+        title: LiDAX Ultra
+        columns: 4
+        entities:
+          - entity: lawn_mower.lidax_ultra_2
+            name: Sekačka
+          - entity: sensor.lidax_ultra
+            name: Baterie
+          - entity: sensor.lidax_ultra_2
+            name: Stav
+          - entity: sensor.lidax_ultra_task_status
+            name: Hláška úlohy
+          - entity: sensor.lidax_ultra_cloud_online
+            name: Cloud
+
+      - type: entities
+        title: Ovládání
+        show_header_toggle: false
+        entities:
+          - entity: select.lidax_ultra
+            name: Aktivní mapa
+          - entity: sensor.lidax_ultra_3
+            name: Aktivní mapa v HA
+          - entity: sensor.lidax_ultra_task_status
+            name: Hláška úlohy
+          - entity: sensor.lidax_ultra_current_map_area
+            name: Plocha mapy
+          - entity: sensor.lidax_ultra_current_map_zones
+            name: Počet zón
+          - entity: sensor.lidax_ultra_do_not_disturb
+            name: Noční klid
+          - entity: sensor.lidax_ultra_do_not_disturb_start
+            name: Klid od
+          - entity: sensor.lidax_ultra_do_not_disturb_end
+            name: Klid do
+
+      - type: grid
+        title: Rychlé akce
+        columns: 3
+        square: false
+        cards:
+          - type: button
+            entity: lawn_mower.lidax_ultra_2
+            name: Start
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: lawn_mower.start_mowing
+              target:
+                entity_id: lawn_mower.lidax_ultra_2
+          - type: button
+            entity: lawn_mower.lidax_ultra_2
+            name: Pause
+            icon: mdi:pause
+            tap_action:
+              action: call-service
+              service: lawn_mower.pause
+              target:
+                entity_id: lawn_mower.lidax_ultra_2
+          - type: button
+            entity: lawn_mower.lidax_ultra_2
+            name: Dock
+            icon: mdi:home-map-marker
+            tap_action:
+              action: call-service
+              service: lawn_mower.dock
+              target:
+                entity_id: lawn_mower.lidax_ultra_2
+          - type: button
+            entity: select.lidax_ultra
+            name: Horni
+            icon: mdi:map
+            tap_action:
+              action: call-service
+              service: select.select_option
+              target:
+                entity_id: select.lidax_ultra
+              data:
+                option: Horni
+          - type: button
+            entity: select.lidax_ultra
+            name: Spodni
+            icon: mdi:map-outline
+            tap_action:
+              action: call-service
+              service: select.select_option
+              target:
+                entity_id: select.lidax_ultra
+              data:
+                option: Spodni
+
+      - type: gauge
+        entity: sensor.lidax_ultra_current_mowing_progress
+        name: Aktuální průběh sečení
+        min: 0
+        max: 100
+        severity:
+          green: 70
+          yellow: 25
+          red: 0
+
+      - type: entities
+        title: Aktuální sečení
+        show_header_toggle: false
+        entities:
+          - entity: sensor.lidax_ultra_current_mowed_area
+            name: Posekáno teď
+          - entity: sensor.lidax_ultra_current_mowing_target_area
+            name: Cílová plocha
+          - entity: sensor.lidax_ultra_current_mowing_progress
+            name: Průběh
+          - entity: sensor.lidax_ultra_last_cleaning_time
+            name: Poslední sečení
+          - entity: sensor.lidax_ultra_last_cleaning_area
+            name: Poslední plocha
+          - entity: sensor.lidax_ultra_last_cleaning_duration
+            name: Poslední délka
+          - entity: sensor.lidax_ultra_last_mowing_map
+            name: Poslední mapa
+          - entity: sensor.lidax_ultra_total_mowed_area
+            name: Součet z historie
+
+      - type: vertical-stack
+        title: Plánování aktivní mapy
+        cards:
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: sensor.lidax_ultra_current_map_schedules
+                name: Počet plánů
+          - type: conditional
+            conditions:
+              - entity: sensor.lidax_ultra_current_map_schedule_0
+                state_not: unavailable
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.lidax_ultra_current_map_schedule_0
+                  name: Plán 0
+          - type: conditional
+            conditions:
+              - entity: sensor.lidax_ultra_current_map_schedule_1
+                state_not: unavailable
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.lidax_ultra_current_map_schedule_1
+                  name: Plán 1
+          - type: conditional
+            conditions:
+              - entity: sensor.lidax_ultra_current_map_schedule_2
+                state_not: unavailable
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.lidax_ultra_current_map_schedule_2
+                  name: Plán 2
+
+      - type: markdown
+        title: Co už čteme
+        content: >-
+          **Stabilní:** mapy, názvy map, zóny, plocha mapy, plánování,
+          aktuální mapa, baterie, stav sekačky, live průběh sečení, historie
+          sečení, DND/noční klid a součty podle map.
+
+          **Experimentální:** přesná poloha, vizuální maska posečené části,
+          video feed.
+
+  - title: Historie
+    path: history
+    icon: mdi:history
+    cards:
+      - type: markdown
+        title: Souhrn historie
+        content: >-
+          {% set history = state_attr('sensor.lidax_ultra_mowing_history', 'history') or [] %}
+          {% set total = states('sensor.lidax_ultra_total_mowed_area') %}
+          **Běhů:** {{ states('sensor.lidax_ultra_mowing_history') }}
+
+          **Celkem posekáno:** {{ total }} m²
+
+          {% set by_map = state_attr('sensor.lidax_ultra_total_mowed_area', 'by_map') or {} %}
+          {% for name, area in by_map.items() %}
+          **{{ name }}:** {{ area }} m²
+          {% endfor %}
+
+      - type: markdown
+        title: Poslední sečení
+        content: |
+          {% set history = state_attr('sensor.lidax_ultra_mowing_history', 'history') or [] %}
+          | Datum | Mapa | Plocha | Délka | Dokončení | Status |
+          |---|---:|---:|---:|---:|---:|
+          {% for item in history[:10] %}
+          {% set ts = item.created_at or item.start_time %}
+          {% set raw = item.status_code %}
+          {% set status = 'Dokončeno' if raw == 1 else 'Kód ' ~ raw %}
+          | {{ as_timestamp(ts) | timestamp_custom('%d.%m. %H:%M') if ts else 'N/A' }} | {{ item.map_name or 'N/A' }} | {{ item.mowed_area or 'N/A' }} m² | {{ item.duration or 'N/A' }} min | {{ item.completion_percent or 'N/A' }} % | {{ status }} |
+          {% endfor %}
+
+      - type: history-graph
+        title: Trendy
+        hours_to_show: 72
+        entities:
+          - entity: sensor.lidax_ultra
+            name: Baterie
+          - entity: sensor.lidax_ultra_current_mowing_progress
+            name: Průběh sečení
+          - entity: sensor.lidax_ultra_current_mowed_area
+            name: Posekáno teď
+
+  - title: Diagnostika
+    path: debug
+    icon: mdi:flask-outline
+    cards:
+      - type: entities
+        title: Zařízení
+        show_header_toggle: false
+        entities:
+          - entity: sensor.lidax_ultra_firmware_version_2
+            name: Firmware
+          - entity: sensor.lidax_ultra_cloud_status
+            name: Cloud status
+          - entity: sensor.lidax_ultra_cloud_last_update
+            name: Cloud update
+          - entity: sensor.lidax_ultra_cloud_video_status
+            name: Cloud video
+          - entity: sensor.lidax_ultra_do_not_disturb
+            name: Do Not Disturb
+          - entity: sensor.lidax_ultra_do_not_disturb_start
+            name: DND start
+          - entity: sensor.lidax_ultra_do_not_disturb_end
+            name: DND end
+          - entity: sensor.lidax_ultra_saved_maps
+            name: Uložené mapy
+          - entity: sensor.lidax_ultra_map_names
+            name: Názvy map
+
+      - type: entities
+        title: Nastavení a runtime
+        show_header_toggle: false
+        entities:
+          - entity: sensor.lidax_ultra_ai_obstacle_detection
+            name: AI překážky
+          - entity: sensor.lidax_ultra_current_path_avoid_obstacles
+            name: Avoid obstacles
+          - entity: sensor.lidax_ultra_position_source
+            name: Zdroj pozice
+          - entity: sensor.lidax_ultra_current_position_x
+            name: Pozice X
+          - entity: sensor.lidax_ultra_current_position_y
+            name: Pozice Y
+          - entity: sensor.lidax_ultra_runtime_layers
+            name: Runtime vrstvy
+          - entity: sensor.lidax_ultra_ota_info
+            name: OTA info
