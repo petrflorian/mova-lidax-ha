@@ -18,14 +18,8 @@ jobs:
       - name: Build HACS zip
         run: |
           mkdir -p dist
-          zip -r dist/mova_lidax.zip \
-            custom_components/mova_lidax \
-            docs \
-            README.md \
-            CHANGELOG.md \
-            LICENSE \
-            NOTICE.md \
-            hacs.json \
+          cd custom_components/mova_lidax
+          zip -r ../../dist/mova_lidax.zip . \
             -x "*/__pycache__/*" "*.pyc" ".DS_Store"
 
       - name: Create GitHub release

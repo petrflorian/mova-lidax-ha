@@ -1,6 +1,6 @@
 # MOVA LiDAX 0.1 Production Checklist
 
-This is the production handoff checklist for the `0.1.1` build.
+This is the production handoff checklist for the `0.1.2` build.
 
 ## HACS Install
 

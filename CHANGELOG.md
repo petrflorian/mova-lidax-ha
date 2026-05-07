@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+Fix HACS release ZIP layout so `manifest.json` is extracted directly into
+`/config/custom_components/mova_lidax`.
+
 ## 0.1.1
 
 Packaging and production UX cleanup.
