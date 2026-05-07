@@ -8,11 +8,11 @@ views:
         title: LiDAX Ultra
         columns: 4
         entities:
-          - entity: lawn_mower.lidax_ultra_2
+          - entity: lawn_mower.lidax_ultra
             name: Sekačka
           - entity: sensor.lidax_ultra
             name: Baterie
-          - entity: sensor.lidax_ultra_2
+          - entity: sensor.lidax_ultra_state
             name: Stav
           - entity: sensor.lidax_ultra_task_status
             name: Hláška úlohy
@@ -25,7 +25,7 @@ views:
         entities:
           - entity: select.lidax_ultra
             name: Aktivní mapa
-          - entity: sensor.lidax_ultra_3
+          - entity: sensor.lidax_ultra_active_map_ha
             name: Aktivní mapa v HA
           - entity: sensor.lidax_ultra_task_status
             name: Hláška úlohy
@@ -46,32 +46,32 @@ views:
         square: false
         cards:
           - type: button
-            entity: lawn_mower.lidax_ultra_2
+            entity: lawn_mower.lidax_ultra
             name: Start
             icon: mdi:play
             tap_action:
               action: call-service
               service: lawn_mower.start_mowing
               target:
-                entity_id: lawn_mower.lidax_ultra_2
+                entity_id: lawn_mower.lidax_ultra
           - type: button
-            entity: lawn_mower.lidax_ultra_2
+            entity: lawn_mower.lidax_ultra
             name: Pause
             icon: mdi:pause
             tap_action:
               action: call-service
               service: lawn_mower.pause
               target:
-                entity_id: lawn_mower.lidax_ultra_2
+                entity_id: lawn_mower.lidax_ultra
           - type: button
-            entity: lawn_mower.lidax_ultra_2
+            entity: lawn_mower.lidax_ultra
             name: Dock
             icon: mdi:home-map-marker
             tap_action:
               action: call-service
               service: lawn_mower.dock
               target:
-                entity_id: lawn_mower.lidax_ultra_2
+                entity_id: lawn_mower.lidax_ultra
           - type: button
             entity: select.lidax_ultra
             name: Horni
