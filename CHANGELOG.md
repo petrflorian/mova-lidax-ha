@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1
+
+Packaging and production UX cleanup.
+
+- Vendor the patched Dreame/MOVA transport inside `mova_lidax`.
+- Remove the separate top-level `dreame_mower` custom component from the HACS package.
+- Add a built-in `MOVA LiDAX` sidebar panel.
+- Remove the need to edit Lovelace YAML for the default dashboard.
+
 ## 0.1.0
 
 Initial production candidate.
@@ -14,4 +23,3 @@ Initial production candidate.
 - Add read-only mowing history.
 - Add read-only schedule overview.
 - Include patched `dreame_mower` transport dependency.
-

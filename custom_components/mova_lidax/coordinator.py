@@ -16,7 +16,7 @@ from homeassistant.const import CONF_NAME, CONF_PASSWORD, CONF_USERNAME
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from custom_components.dreame_mower.dreame import DreameMowerDevice
+from .dreame import DreameMowerDevice
 
 from .const import (
     CONF_ACCOUNT_TYPE,

@@ -9,7 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv, entity_platform
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from custom_components.dreame_mower.dreame import DreameMowerState
+from .dreame import DreameMowerState
 
 from .const import (
     ATTR_MAP_ID,

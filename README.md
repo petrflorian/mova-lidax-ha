@@ -2,7 +2,7 @@
 
 Custom Home Assistant integration for MOVA LiDAX Ultra mowers.
 
-Current version: `0.1.0`
+Current version: `0.1.1`
 
 ## Status
 
@@ -39,6 +39,7 @@ Known limits:
 6. Install `MOVA LiDAX`.
 7. Restart Home Assistant.
 8. Add `MOVA LiDAX` from `Settings -> Devices & services`.
+9. Open `MOVA LiDAX` in the sidebar.
 
 Use:
 
@@ -47,37 +48,18 @@ Use:
 
 ## Manual Install
 
-Copy both folders into your Home Assistant config:
+Copy the integration folder into your Home Assistant config:
 
 ```text
-custom_components/dreame_mower -> /config/custom_components/dreame_mower
 custom_components/mova_lidax -> /config/custom_components/mova_lidax
 ```
 
 Restart Home Assistant and add `MOVA LiDAX`.
 
-## Optional Dashboard
+## Dashboard
 
-Copy:
-
-```text
-dashboard/mova_lidax.yaml -> /config/dashboards/mova_lidax.yaml
-```
-
-Add to `configuration.yaml`:
-
-```yaml
-lovelace:
-  dashboards:
-    mova-lidax:
-      mode: yaml
-      title: MOVA LiDAX
-      icon: mdi:robot-mower
-      show_in_sidebar: true
-      filename: dashboards/mova_lidax.yaml
-```
-
-Restart Home Assistant after changing `configuration.yaml`.
+The integration registers its own `MOVA LiDAX` sidebar panel. No manual
+Lovelace YAML is required.
 
 ## Updating
 
@@ -94,7 +76,8 @@ or copy the latest release files over the old `custom_components` folders and re
 
 ## Included Dependency
 
-This repository includes a patched copy of `dreame_mower` because `mova_lidax` currently reuses its MOVA/Dreame cloud transport.
+This repository includes a vendored copy of the patched Dreame/MOVA transport
+inside `custom_components/mova_lidax/dreame`.
 
 Original project:
 
@@ -109,4 +92,3 @@ See:
 ```text
 docs/PRODUCTION_0_1.md
 ```
-

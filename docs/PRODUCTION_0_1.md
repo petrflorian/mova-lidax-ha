@@ -1,57 +1,40 @@
 # MOVA LiDAX 0.1 Production Checklist
 
-This is the production handoff checklist for the local `0.1.0` build.
+This is the production handoff checklist for the `0.1.1` build.
 
-## Build Release Package
+## HACS Install
 
-```bash
-cd /Users/petr/Projects/mova
-./scripts/build-mova-lidax-release.sh
-```
+1. Add `https://github.com/petrflorian/mova-lidax-ha` as a HACS custom repository.
+2. Category: `Integration`.
+3. Install `MOVA LiDAX`.
+4. Restart Home Assistant.
+5. Add `MOVA LiDAX` from `Settings -> Devices & services`.
+6. Open `MOVA LiDAX` in the sidebar.
 
-Output:
+## Manual Install
 
-```text
-/Users/petr/Projects/mova/dist/mova-lidax-0.1.0
-```
-
-## Copy To Production HA
-
-Copy these folders into production Home Assistant:
+Copy this folder into Home Assistant:
 
 ```text
-dist/mova-lidax-0.1.0/custom_components/dreame_mower -> /config/custom_components/dreame_mower
-dist/mova-lidax-0.1.0/custom_components/mova_lidax -> /config/custom_components/mova_lidax
+custom_components/mova_lidax -> /config/custom_components/mova_lidax
 ```
 
-Optional dashboard:
-
-```text
-dist/mova-lidax-0.1.0/dashboard/mova_lidax.yaml -> /config/dashboards/mova_lidax.yaml
-```
-
-## Restart And Add Integration
-
-1. Restart Home Assistant.
-2. Go to `Settings -> Devices & services`.
-3. Add `MOVA LiDAX`.
-4. Login with MOVA cloud account.
-5. Select the LiDAX mower.
+Restart Home Assistant and add the integration.
 
 ## First Validation
 
 Check that these entities exist and are not broken:
 
-- `lawn_mower.lidax_ultra_2`
+- `lawn_mower.lidax_ultra`
 - `select.lidax_ultra`
 - `sensor.lidax_ultra`
-- `sensor.lidax_ultra_2`
+- `sensor.lidax_ultra_state`
 - `sensor.lidax_ultra_task_status`
 - `sensor.lidax_ultra_do_not_disturb`
 - `sensor.lidax_ultra_current_mowing_progress`
 - `sensor.lidax_ultra_mowing_history`
 
-Entity IDs may differ if production HA already has similarly named entities.
+Entity IDs may differ if production HA already has similarly named entities. The built-in panel tries to find suffixed LiDAX entities automatically.
 
 ## Known 0.1 Limits
 
@@ -59,5 +42,3 @@ Entity IDs may differ if production HA already has similarly named entities.
 - No production live position marker.
 - No video feed.
 - Schedule editing stays in MOVA app.
-- Dashboard YAML currently assumes the common entity IDs from the dev instance.
-

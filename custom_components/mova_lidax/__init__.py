@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
+from homeassistant.components.frontend import async_register_built_in_panel, async_remove_panel
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, ServiceCall
@@ -15,6 +19,9 @@ PLATFORMS = (
     Platform.SENSOR,
     Platform.SELECT,
 )
+
+PANEL_URL_PATH = "mova-lidax"
+PANEL_STATIC_URL = "/mova_lidax_static/panel.js"
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -39,6 +46,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if not hass.services.has_service(DOMAIN, SERVICE_SWITCH_MAP):
         hass.services.async_register(DOMAIN, SERVICE_SWITCH_MAP, async_switch_map_service)
 
+    await _async_register_panel(hass)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
@@ -52,4 +60,30 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         coordinator.device.disconnect()
         if not hass.data[DOMAIN] and hass.services.has_service(DOMAIN, SERVICE_SWITCH_MAP):
             hass.services.async_remove(DOMAIN, SERVICE_SWITCH_MAP)
+        if not hass.data[DOMAIN]:
+            async_remove_panel(hass, PANEL_URL_PATH)
     return unload_ok
+
+
+async def _async_register_panel(hass: HomeAssistant) -> None:
+    """Register the built-in MOVA LiDAX dashboard panel."""
+    panel_file = Path(__file__).parent / "frontend" / "panel.js"
+    await hass.http.async_register_static_paths(
+        [StaticPathConfig(PANEL_STATIC_URL, str(panel_file), cache_headers=False)]
+    )
+    async_register_built_in_panel(
+        hass,
+        component_name="custom",
+        sidebar_title="MOVA LiDAX",
+        sidebar_icon="mdi:robot-mower",
+        frontend_url_path=PANEL_URL_PATH,
+        config={
+            "_panel_custom": {
+                "name": "mova-lidax-panel",
+                "embed_iframe": True,
+                "trust_external": False,
+                "js_url": PANEL_STATIC_URL,
+            }
+        },
+        require_admin=False,
+    )

@@ -19,8 +19,7 @@ jobs:
         run: |
           mkdir -p dist
           zip -r dist/mova_lidax.zip \
-            custom_components \
-            dashboard \
+            custom_components/mova_lidax \
             docs \
             README.md \
             CHANGELOG.md \

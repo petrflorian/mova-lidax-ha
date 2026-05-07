@@ -11,7 +11,7 @@ from homeassistant.const import CONF_NAME, CONF_PASSWORD, CONF_USERNAME
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 
-from custom_components.dreame_mower.dreame.protocol import DreameMowerDreameHomeCloudProtocol
+from .dreame.protocol import DreameMowerDreameHomeCloudProtocol
 
 from .const import CONF_ACCOUNT_TYPE, CONF_COUNTRY, CONF_DID, CONF_MAC, CONF_MODEL, DEFAULT_ACCOUNT_TYPE, DEFAULT_COUNTRY, DOMAIN
 
