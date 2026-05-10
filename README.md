@@ -4,11 +4,9 @@ Custom Home Assistant integration for MOVA LiDAX Ultra mowers.
 
 Current version: `0.1.2`
 
-## Status
+This is an early production build for one known MOVA LiDAX Ultra setup. It is cloud-only and currently focuses on reliable monitoring, map switching, current mowing progress and mowing history.
 
-This is an early production build for one known MOVA LiDAX Ultra setup.
-
-Works:
+## Works
 
 - MOVA cloud login and mower discovery
 - Main `lawn_mower` entity
@@ -21,20 +19,27 @@ Works:
 - Current mowing progress, mowed area and target area
 - Read-only mowing history from cloud event `4.1`
 - Read-only schedule overview
+- Built-in `MOVA LiDAX` sidebar panel
 
-Known limits:
+## Known Limits
 
 - Cloud only; local LAN control is not implemented.
 - Live mower position is not production-ready yet.
 - Video feed is not implemented.
 - Schedule editing should stay in the MOVA app for now.
+- DND editing should stay in the MOVA app for now.
 
 ## HACS Install
 
 1. Open HACS in Home Assistant.
 2. Go to `Integrations`.
 3. Open `Custom repositories`.
-4. Add this repository URL.
+4. Add this repository URL:
+
+```text
+https://github.com/petrflorian/mova-lidax-ha
+```
+
 5. Select category `Integration`.
 6. Install `MOVA LiDAX`.
 7. Restart Home Assistant.
@@ -56,28 +61,25 @@ custom_components/mova_lidax -> /config/custom_components/mova_lidax
 
 Restart Home Assistant and add `MOVA LiDAX`.
 
+Do not install a separate `dreame_mower` custom component for this integration. The required patched MOVA/Dreame transport is vendored inside `custom_components/mova_lidax/dreame`.
+
 ## Dashboard
 
-The integration registers its own `MOVA LiDAX` sidebar panel. No manual
-Lovelace YAML is required.
+The integration registers its own `MOVA LiDAX` sidebar panel. No manual Lovelace YAML or `configuration.yaml` changes are required.
 
 ## Updating
 
 If installed through HACS, update from HACS and restart Home Assistant.
 
-If installed manually:
-
-```bash
-cd /config
-git pull
-```
-
-or copy the latest release files over the old `custom_components` folders and restart Home Assistant.
+If installed manually, copy the latest release files over the old `custom_components/mova_lidax` folder and restart Home Assistant.
 
 ## Included Dependency
 
-This repository includes a vendored copy of the patched Dreame/MOVA transport
-inside `custom_components/mova_lidax/dreame`.
+This repository includes a vendored copy of the patched Dreame/MOVA transport inside:
+
+```text
+custom_components/mova_lidax/dreame
+```
 
 Original project:
 
