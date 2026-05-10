@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3
+
+Branding update.
+
+- Add local Home Assistant brand assets in `brand/icon.png` and `brand/logo.png`.
+- Add the MOVA logo to the built-in sidebar panel.
+- Serve frontend panel assets from the integration static directory.
+
 ## 0.1.2
 
 Fix HACS release ZIP layout so `manifest.json` is extracted directly into

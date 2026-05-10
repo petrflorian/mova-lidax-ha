@@ -2,7 +2,7 @@
 
 Custom Home Assistant integration for MOVA LiDAX Ultra mowers.
 
-Current version: `0.1.2`
+Current version: `0.1.3`
 
 This is an early production build for one known MOVA LiDAX Ultra setup. It is cloud-only and currently focuses on reliable monitoring, map switching, current mowing progress and mowing history.
 

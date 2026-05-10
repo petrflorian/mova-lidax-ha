@@ -107,6 +107,18 @@ class MovaLidaxPanel extends HTMLElement {
           font-family: var(--ha-font-family-body, sans-serif);
         }
         .wrap { max-width: 1180px; margin: 0 auto; }
+        .hero {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+          margin-bottom: 24px;
+        }
+        .brand-logo {
+          width: min(210px, 42vw);
+          height: auto;
+          opacity: .94;
+        }
         h1 { margin: 0 0 8px; font-size: clamp(34px, 4vw, 56px); line-height: 1; }
         .subtitle { color: var(--secondary-text-color); font-size: 18px; margin-bottom: 24px; }
         .grid { display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -142,14 +154,20 @@ class MovaLidaxPanel extends HTMLElement {
         .empty { color: var(--secondary-text-color); }
         @media (max-width: 900px) {
           :host { padding: 16px; }
+          .hero { align-items: flex-start; flex-direction: column-reverse; gap: 12px; }
           .grid { grid-template-columns: 1fr; }
           .wide, .full { grid-column: auto; }
           .value { font-size: 24px; }
         }
       </style>
       <div class="wrap">
-        <h1>MOVA LiDAX</h1>
-        <div class="subtitle">Produkční přehled sekačky, map, DND, aktuálního průběhu a historie.</div>
+        <div class="hero">
+          <div>
+            <h1>LiDAX Ultra</h1>
+            <div class="subtitle">Produkční přehled sekačky, map, DND, aktuálního průběhu a historie.</div>
+          </div>
+          <img class="brand-logo" src="/mova_lidax_static/logo.png" alt="MOVA">
+        </div>
 
         <div class="grid">
           <div class="card">

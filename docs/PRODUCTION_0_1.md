@@ -1,6 +1,6 @@
 # MOVA LiDAX 0.1 Production Checklist
 
-Checklist for build `0.1.2`.
+Checklist for build `0.1.3`.
 
 ## HACS Install
 

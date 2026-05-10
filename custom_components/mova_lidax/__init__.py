@@ -67,9 +67,9 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def _async_register_panel(hass: HomeAssistant) -> None:
     """Register the built-in MOVA LiDAX dashboard panel."""
-    panel_file = Path(__file__).parent / "frontend" / "panel.js"
+    frontend_dir = Path(__file__).parent / "frontend"
     await hass.http.async_register_static_paths(
-        [StaticPathConfig(PANEL_STATIC_URL, str(panel_file), cache_headers=False)]
+        [StaticPathConfig("/mova_lidax_static", str(frontend_dir), cache_headers=False)]
     )
     async_register_built_in_panel(
         hass,
