@@ -23,6 +23,7 @@ SERVICE_RAW_ACTION = "raw_action"
 
 ATTR_MAP_ID = "map_id"
 ATTR_MAP_INDEX = "map_index"
+ATTR_CALIBRATION = "calibration_points"
 MAX_SCHEDULE_SLOTS = 3
 ENABLE_DEBUG_SNAPSHOT = False
 

@@ -18,6 +18,7 @@ PLATFORMS = (
     Platform.LAWN_MOWER,
     Platform.SENSOR,
     Platform.SELECT,
+    Platform.CAMERA,
 )
 
 PANEL_URL_PATH = "mova-lidax"
@@ -71,6 +72,7 @@ async def _async_register_panel(hass: HomeAssistant) -> None:
     await hass.http.async_register_static_paths(
         [StaticPathConfig("/mova_lidax_static", str(frontend_dir), cache_headers=False)]
     )
+    async_remove_panel(hass, PANEL_URL_PATH)
     async_register_built_in_panel(
         hass,
         component_name="custom",

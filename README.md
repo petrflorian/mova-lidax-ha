@@ -2,7 +2,7 @@
 
 Custom Home Assistant integration for MOVA LiDAX Ultra mowers.
 
-Current version: `0.1.3`
+Current version: `0.1.4`
 
 This is an early production build for one known MOVA LiDAX Ultra setup. It is cloud-only and currently focuses on reliable monitoring, map switching, current mowing progress and mowing history.
 
@@ -15,6 +15,7 @@ This is an early production build for one known MOVA LiDAX Ultra setup. It is cl
 - Active saved map selection
 - Two-map switching used by LiDAX Ultra
 - Saved map names, area and zone count
+- Rendered current map camera for Home Assistant dashboards
 - Do Not Disturb read-only state and time window
 - Current mowing progress, mowed area and target area
 - Read-only mowing history from cloud event `4.1`
@@ -25,6 +26,7 @@ This is an early production build for one known MOVA LiDAX Ultra setup. It is cl
 
 - Cloud only; local LAN control is not implemented.
 - Live mower position is not production-ready yet.
+- The map camera is an early renderer integration; exact live mower position still needs validation.
 - Video feed is not implemented.
 - Schedule editing should stay in the MOVA app for now.
 - DND editing should stay in the MOVA app for now.
@@ -65,7 +67,7 @@ Do not install a separate `dreame_mower` custom component for this integration. 
 
 ## Dashboard
 
-The integration registers its own `MOVA LiDAX` sidebar panel. No manual Lovelace YAML or `configuration.yaml` changes are required.
+The integration registers its own `MOVA LiDAX` sidebar panel. It also exposes a rendered map camera that can be used in standard Home Assistant picture/entity cards. No manual Lovelace YAML or `configuration.yaml` changes are required for the built-in panel.
 
 ## Updating
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.4
+
+Map camera groundwork.
+
+- Add a Home Assistant `camera` platform with a rendered current map entity.
+- Add disabled-by-default diagnostic map-data camera, following the Dreame Vacuum integration pattern.
+- Make sidebar panel registration safe during config-entry reloads.
+- Guard map rendering until saved-map geometry is fully available.
+
 ## 0.1.3
 
 Branding update.
